@@ -1,0 +1,10 @@
+# Dari fine-tuning deps (install in a fresh venv on the RTX machine).
+# Unsloth handles torch/bitsandbytes for QLoRA on NVIDIA GPUs.
+unsloth
+trl>=0.9
+peft>=0.11
+accelerate>=0.30
+bitsandbytes>=0.43
+datasets>=2.19
+openai>=1.30        # for prepare_dari_data.py + eval/run_eval.py
+sentencepiece

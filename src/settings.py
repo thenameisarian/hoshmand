@@ -47,7 +47,13 @@ DEFAULT_SETTINGS = {
     "stt_enabled": False,
     "stt_provider": "disabled",
     "stt_model": "base",
-    "stt_language": "",
+    # Hooshmand is Persian-first: default Whisper transcription to Persian/Dari
+    # ("fa" covers Dari and Iranian Farsi). Clear this for auto-detect.
+    "stt_language": "fa",
+    # Dialect the assistant replies in — a code from src/dialects.py
+    # (e.g. "auto", "en", "prs-standard", "fa-tehrani", "tg-standard").
+    # Defaults to Standard Dari ("Dari first"); user picks one in Settings.
+    "assistant_dialect": "prs-standard",
     "search_provider": "searxng",
     # Default fallback chain — when the primary provider fails or
     # rate-limits, we try DuckDuckGo next. Free, no API key required, so

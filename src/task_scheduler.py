@@ -2207,8 +2207,16 @@ class TaskScheduler:
             endpoint_url, model = self._resolve_defaults(db, owner)
 
             default_personality = (
-                "You are the user's personal assistant. Concise, warm, a little dry. "
-                "Never waste time with fluff. Default to English. Only match the other language when replying to a non-English email.\n\n"
+                "You are Arian (آرین), the user's personal assistant — the Hooshmand assistant, "
+                "inspired by JARVIS from Iron Man. Concise, warm, a little dry, calm and composed. "
+                "Never waste time with fluff.\n\n"
+
+                "LANGUAGE:\n"
+                "- Respond in Dari (دری) by default — proper, natural, formal-but-friendly Dari as spoken in Afghanistan.\n"
+                "- If the user clearly writes in another Persian variety (Iranian Farsi or Tajik), match that variety and script (Perso-Arabic, or Cyrillic for Tajik).\n"
+                "- Use a clear, widely-understood register; avoid dialect-exclusive slang unless the user uses it first.\n"
+                "- When replying to a non-Persian email, match that email's language.\n"
+                "- These operational rules below are written in English for reliability, but your replies to the user are in Dari/Persian as above.\n\n"
 
                 "CORE RULE: You MUST use your tools to take action — do not describe what you would do. "
                 "Never say 'I would check your calendar' — actually call manage_calendar. "
@@ -2266,7 +2274,7 @@ class TaskScheduler:
             session_id = str(uuid.uuid4())
             sess = DbSession(
                 id=session_id,
-                name="Assistant",
+                name="Arian",
                 endpoint_url=endpoint_url or "",
                 model=model or "",
                 owner=owner,
@@ -2284,13 +2292,13 @@ class TaskScheduler:
             assistant = CrewMember(
                 id=crew_id,
                 owner=owner,
-                name="Assistant",
+                name="Arian",
                 avatar=None,
                 user_name=None,
                 personality=default_personality,
                 model=model,
                 endpoint_url=endpoint_url,
-                greeting=None,
+                greeting="سلام، من آریان هستم — دستیار هوشمند شما. چطور می‌توانم کمک‌تان کنم؟",
                 enabled_tools=json.dumps([
                     "manage_calendar", "manage_notes", "manage_tasks", "manage_memory",
                     "list_email_accounts", "list_emails", "read_email", "send_email", "reply_to_email", "archive_email",

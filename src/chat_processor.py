@@ -185,6 +185,17 @@ class ChatProcessor:
                 "role": "system",
                 "content": preset_system_prompt
             })
+        # Hooshmand: steer the reply language/dialect from the user's
+        # selected dialect (Settings -> Assistant dialect). "auto" injects
+        # nothing so the persona's own language rules apply.
+        try:
+            from src.dialects import dialect_directive
+            from src.settings import get_setting
+            _dialect_dir = dialect_directive(get_setting("assistant_dialect", "auto"))
+            if _dialect_dir:
+                preface.append({"role": "system", "content": _dialect_dir})
+        except Exception:
+            logger.debug("Failed to add dialect directive", exc_info=True)
         if not agent_mode:
             try:
                 from src.user_time import current_datetime_prompt

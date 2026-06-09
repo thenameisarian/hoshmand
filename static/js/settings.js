@@ -2177,6 +2177,64 @@ function initAccount() {
   }
 }
 
+async function initDialectSettings() {
+  var sel = el('set-assistantDialect');
+  if (!sel) return;
+  var msg = el('set-dialectSettingsMsg');
+  var DIALECTS = [
+    {c:'auto', g:'General', n:'Auto-detect (match me) · خودکار'},
+    {c:'en', g:'General', n:'English'},
+    {c:'fa-standard', g:'Iranian Persian (Farsi)', n:'Standard Persian / Tehrani · فارسی معیار'},
+    {c:'fa-tehrani', g:'Iranian Persian (Farsi)', n:'Tehrani · تهرانی'},
+    {c:'fa-esfahani', g:'Iranian Persian (Farsi)', n:'Esfahani · اصفهانی'},
+    {c:'fa-shirazi', g:'Iranian Persian (Farsi)', n:'Shirazi · شیرازی'},
+    {c:'fa-mashhadi', g:'Iranian Persian (Farsi)', n:'Mashhadi (Khorasani) · مشهدی'},
+    {c:'fa-yazdi', g:'Iranian Persian (Farsi)', n:'Yazdi · یزدی'},
+    {c:'fa-kermani', g:'Iranian Persian (Farsi)', n:'Kermani · کرمانی'},
+    {c:'fa-tabrizi', g:'Iranian Persian (Farsi)', n:'Tabrizi Persian · فارسی تبریزی'},
+    {c:'fa-abadani', g:'Iranian Persian (Farsi)', n:'Abadani (Khuzestani) · آبادانی'},
+    {c:'fa-qazvini', g:'Iranian Persian (Farsi)', n:'Qazvini · قزوینی'},
+    {c:'fa-kashani', g:'Iranian Persian (Farsi)', n:'Kashani · کاشانی'},
+    {c:'fa-hamedani', g:'Iranian Persian (Farsi)', n:'Hamedani · همدانی'},
+    {c:'prs-standard', g:'Dari (Afghanistan)', n:'Standard Dari (Kabuli) · دری معیار'},
+    {c:'prs-kabuli', g:'Dari (Afghanistan)', n:'Kabuli · کابلی'},
+    {c:'prs-herati', g:'Dari (Afghanistan)', n:'Herati · هراتی'},
+    {c:'prs-mazari', g:'Dari (Afghanistan)', n:'Mazari (Balkhi) · مزاری'},
+    {c:'prs-badakhshi', g:'Dari (Afghanistan)', n:'Badakhshi · بدخشی'},
+    {c:'prs-panjshiri', g:'Dari (Afghanistan)', n:'Panjshiri · پنجشیری'},
+    {c:'prs-hazaragi', g:'Dari (Afghanistan)', n:'Hazaragi · هزارگی'},
+    {c:'prs-aimaqi', g:'Dari (Afghanistan)', n:'Aimaqi · ایماقی'},
+    {c:'tg-standard', g:'Tajik (Tajikistan / Central Asia)', n:'Standard Tajik · тоҷикии адабӣ'},
+    {c:'tg-khujandi', g:'Tajik (Tajikistan / Central Asia)', n:'Khujandi (Northern) · хуҷандӣ'},
+    {c:'tg-samarqandi', g:'Tajik (Tajikistan / Central Asia)', n:'Samarqandi–Bukhori · самарқандӣ'},
+    {c:'tg-bukhori', g:'Tajik (Tajikistan / Central Asia)', n:'Bukhori (Bukharan) · бухороӣ'},
+    {c:'tg-kulobi', g:'Tajik (Tajikistan / Central Asia)', n:'Kulobi (Southern) · кӯлобӣ'},
+    {c:'tg-badakhshani', g:'Tajik (Tajikistan / Central Asia)', n:'Badakhshani Tajik · бадахшонӣ'}
+  ];
+  var groups = {};
+  DIALECTS.forEach(function (d) { (groups[d.g] = groups[d.g] || []).push(d); });
+  Object.keys(groups).forEach(function (g) {
+    var og = document.createElement('optgroup'); og.label = g;
+    groups[g].forEach(function (d) {
+      var o = document.createElement('option'); o.value = d.c; o.textContent = d.n; og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+  try {
+    var r = await fetch('/api/auth/settings', { credentials: 'same-origin' });
+    var s = await r.json();
+    if (s.assistant_dialect) sel.value = s.assistant_dialect;
+  } catch (e) { console.warn('Failed to load dialect setting', e); }
+  sel.addEventListener('change', async function () {
+    try {
+      await fetch('/api/auth/settings', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assistant_dialect: sel.value }) });
+      if (msg) { msg.textContent = 'Saved'; msg.style.color = 'var(--fg)'; setTimeout(function () { msg.textContent = ''; }, 2000); }
+    } catch (e) { if (msg) { msg.textContent = 'Failed to save'; msg.style.color = 'var(--red)'; } }
+  });
+}
+
 function initAll() {
   modalEl = el('settings-modal');
   initTabs();
@@ -2191,6 +2249,7 @@ function initAll() {
   initVisionSettings();
   initTtsSettings();
   initSttSettings();
+  initDialectSettings();
   initSearchSettings();
   initResearchSettings();
   initResearchSearchSettings();

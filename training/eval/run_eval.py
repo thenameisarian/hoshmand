@@ -7,7 +7,7 @@ Usage:
     python run_eval.py dari_eval.example.jsonl \
         --base-url http://localhost:11434/v1 \
         --model qwen2.5:7b \
-        --system "تو آریان هستی، دستیار هوشمند کاربر. به دری روان پاسخ بده." \
+        --system "تو آرین هستی، دستیار هوشمند کاربر. به دری روان پاسخ بده." \
         --out results.md
 
 Then a native Dari speaker rates each answer for: fluency, dialect-correctness

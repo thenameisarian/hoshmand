@@ -75,7 +75,7 @@ switch language immediately (no restart).
 
 Open the assistant. You'll see Arian greet you in Dari:
 
-> سلام، من آریان هستم — دستیار هوشمند شما. چطور می‌توانم کمک‌تان کنم؟
+> سلام، من آرین هستم — دستیار هوشمند شما. چطور می‌توانم کمک‌تان کنم؟
 
 Voice input transcribes in Persian by default (`stt_language = fa`). Voice
 *output* and **your-own-voice cloning** need a TTS engine set up — Kokoro

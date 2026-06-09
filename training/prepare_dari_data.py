@@ -31,7 +31,7 @@ import sys
 import time
 
 SYS_PROMPT = (
-    "تو آریان هستی، دستیار هوشمند و مودب کاربر. همیشه به دری روان و طبیعی پاسخ بده."
+    "تو آرین هستی، دستیار هوشمند و مودب کاربر. همیشه به دری روان و طبیعی پاسخ بده."
 )
 
 # Instruction to the translation model. Emphasise Dari (Afghan) register, not

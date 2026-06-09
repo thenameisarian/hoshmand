@@ -17,7 +17,7 @@ One JSON object per line. `dialect` lets us mix/seperate dialects later
 
 ```json
 {"dialect": "dari", "messages": [
-  {"role": "system", "content": "تو آریان هستی، دستیار هوشمند کاربر."},
+  {"role": "system", "content": "تو آرین هستی، دستیار هوشمند کاربر."},
   {"role": "user", "content": "سلام، حالت چطور است؟"},
   {"role": "assistant", "content": "سلام، تشکر. خوب هستم. چطور می‌توانم کمک‌تان کنم؟"}
 ]}

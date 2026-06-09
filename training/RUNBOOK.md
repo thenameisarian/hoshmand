@@ -39,7 +39,7 @@ Outputs a merged model and a GGUF (`outputs/hooshmand-dari-qlora-*`).
 # serve the new model (e.g. import the GGUF into Ollama), then:
 python eval/run_eval.py eval/dari_eval.example.jsonl \
     --base-url http://localhost:11434/v1 --model hooshmand-dari \
-    --system "تو آریان هستی، به دری روان پاسخ بده." --out eval/results.md
+    --system "تو آرین هستی، به دری روان پاسخ بده." --out eval/results.md
 ```
 Native-rate fluency / dialect-correctness / helpfulness in `results.md`.
 If weak, improve the data (step 1–2) and retrain. Expect 2–4 cycles.

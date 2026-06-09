@@ -2298,7 +2298,7 @@ class TaskScheduler:
                 personality=default_personality,
                 model=model,
                 endpoint_url=endpoint_url,
-                greeting="سلام، من آریان هستم — دستیار هوشمند شما. چطور می‌توانم کمک‌تان کنم؟",
+                greeting="سلام، من آرین هستم — دستیار هوشمند شما. چطور می‌توانم کمک‌تان کنم؟",
                 enabled_tools=json.dumps([
                     "manage_calendar", "manage_notes", "manage_tasks", "manage_memory",
                     "list_email_accounts", "list_emails", "read_email", "send_email", "reply_to_email", "archive_email",

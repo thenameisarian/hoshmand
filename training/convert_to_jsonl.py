@@ -12,7 +12,7 @@ Supported inputs (auto-detected, or force with --format):
 
 Usage:
     python convert_to_jsonl.py input.json --dialect dari --out data/dari_sft.jsonl
-    python convert_to_jsonl.py pairs.csv  --dialect farsi --system "تو آریان هستی."
+    python convert_to_jsonl.py pairs.csv  --dialect farsi --system "تو آرین هستی."
 
 Normalizes Persian characters (Arabic ي/ك -> Persian ی/ک) by default.
 This does NOT translate or review — pair it with native-speaker review.

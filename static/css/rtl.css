@@ -50,3 +50,8 @@ html[dir="rtl"] .endpoint-url {
  * In RTL the textarea placeholder/text is right-aligned and collides with it.
  * Move the picker to the start edge (left) so they no longer overlap. */
 html[dir="rtl"] #model-picker-wrap { left: 0 !important; right: auto !important; }
+
+/* RTL fix: the fixed collapse/hamburger button is hard-pinned to the left,
+ * but in RTL the sidebar is on the right — move the toggle to the right so
+ * it sits next to the sidebar it controls. */
+html[dir="rtl"] .hamburger-btn { left: auto !important; right: 9px !important; }

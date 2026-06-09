@@ -36606,3 +36606,11 @@ body.theme-frosted .modal {
    the input beside it (.confirm-btn won't stretch on its own). */
 .ask-user-other-send { flex-shrink: 0; white-space: nowrap; min-height: 39px; }
 .ask-user-other-send:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Hooshmand: desktop UI scale ──
+ * The base UI was dense web sizing (16px root, 14px nav), which felt small
+ * next to native desktop apps. Scale the whole interface up uniformly
+ * (text + icons + spacing). Adjust this single value to taste, or set to 1
+ * to revert. Users can still fine-tune with the browser zoom (Ctrl + / Ctrl -).
+ */
+html { zoom: 1.2; }

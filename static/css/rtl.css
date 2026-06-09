@@ -45,3 +45,8 @@ html[dir="rtl"] .endpoint-url {
 
 /* Numbers and inline latin inside Persian text render correctly via the
  * browser's bidi algorithm; no override needed there. */
+
+/* RTL fix: the model picker is absolutely pinned to the right (the LTR "end").
+ * In RTL the textarea placeholder/text is right-aligned and collides with it.
+ * Move the picker to the start edge (left) so they no longer overlap. */
+html[dir="rtl"] #model-picker-wrap { left: 0 !important; right: auto !important; }

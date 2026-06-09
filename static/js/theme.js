@@ -333,7 +333,7 @@ function _updateFavicon(fg) {
   if (routeShape) {
     svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'>${routeShape.split('__C__').join(fg)}</svg>`;
   } else {
-    svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${fg}'><circle cx='12' cy='12' r='2.4'/><circle cx='5' cy='6' r='1.7'/><circle cx='19' cy='6' r='1.7'/><circle cx='5' cy='18' r='1.7'/><circle cx='19' cy='18' r='1.7'/><path d='M6.6 7.1L10.2 10.6M17.4 7.1L13.8 10.6M6.6 16.9L10.2 13.4M17.4 16.9L13.8 13.4' stroke='${fg}' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>`;
+    svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${fg}'><path d='M4.5 5L19.5 8.5M4.5 5L19.5 15.5M4.5 12L19.5 8.5M4.5 12L19.5 15.5M4.5 19L19.5 8.5M4.5 19L19.5 15.5' stroke='${fg}' stroke-width='1.2' fill='none' stroke-linecap='round' opacity='0.75'/><circle cx='4.5' cy='5' r='1.9'/><circle cx='4.5' cy='12' r='1.9'/><circle cx='4.5' cy='19' r='1.9'/><circle cx='19.5' cy='8.5' r='1.9'/><circle cx='19.5' cy='15.5' r='1.9'/></svg>`;
   }
   const href = 'data:image/svg+xml,' + encodeURIComponent(svg);
   let link = document.querySelector("link[rel='icon']");

@@ -52,7 +52,16 @@
     "Provider": "ارائه‌دهنده",
     "Model": "مدل",
     "Voice": "صدا",
-    "Speed": "سرعت"
+    "Speed": "سرعت",
+    "Brain": "مغز",
+    "Cookbook": "کوک‌بوک",
+    "Deep Research": "تحقیق عمیق",
+    "Theme": "قالب",
+    "new": "جدید",
+    "Open Admin to add endpoints": "برای افزودن اندپوینت، بخش مدیریت را باز کنید",
+    "Add Models": "افزودن مدل‌ها",
+    "AI Defaults": "پیش‌فرض‌های هوش مصنوعی",
+    "Agent Tools": "ابزارهای ایجنت"
   };
 
   function translateText(root) {

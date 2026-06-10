@@ -96,9 +96,9 @@
 
   function run() {
     try {
-      // Ensure RTL + lang even if the markup wasn't updated.
-      document.documentElement.setAttribute("dir", "rtl");
-      document.documentElement.setAttribute("lang", "fa");
+      // Keep the app's native left-to-right layout (it wasn't built for RTL);
+      // we only translate the visible chrome to Persian. Persian text still
+      // renders correctly via the browser's bidi handling.
       translateText(document.body);
       translateAttrs(document.body);
     } catch (e) { /* never break the app over translation */ }

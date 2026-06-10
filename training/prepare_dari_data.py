@@ -80,6 +80,25 @@ def extract_pair(row):
     return None, None
 
 
+def load_examples(dataset, split):
+    """Load examples WITHOUT the heavy `datasets` lib when given a URL or a
+    local .json/.jsonl path (works on any Python, incl. 3.14). Falls back to
+    HuggingFace `datasets` for plain dataset ids (needs Python <=3.12)."""
+    if dataset.startswith(("http://", "https://")) or dataset.endswith((".json", ".jsonl")):
+        if dataset.startswith("http"):
+            import urllib.request
+            with urllib.request.urlopen(dataset) as r:
+                raw = r.read().decode("utf-8")
+        else:
+            with open(dataset, encoding="utf-8") as f:
+                raw = f.read()
+        if dataset.endswith(".jsonl"):
+            return [json.loads(l) for l in raw.splitlines() if l.strip()]
+        return json.loads(raw)
+    from datasets import load_dataset
+    return load_dataset(dataset, split=split)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", default="tatsu-lab/alpaca",
@@ -96,8 +115,7 @@ def main():
                     help="dataset already Dari/Persian: just reformat")
     args = ap.parse_args()
 
-    from datasets import load_dataset
-    ds = load_dataset(args.dataset, split=args.split)
+    ds = load_examples(args.dataset, args.split)
     end = min(len(ds), args.offset + args.limit)
     client = None if args.no_translate else _client(args.endpoint, args.api_key)
 

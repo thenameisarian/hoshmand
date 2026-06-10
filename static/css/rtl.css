@@ -55,3 +55,11 @@ html[dir="rtl"] #model-picker-wrap { left: 0 !important; right: auto !important;
  * but in RTL the sidebar is on the right — move the toggle to the right so
  * it sits next to the sidebar it controls. */
 html[dir="rtl"] .hamburger-btn { left: auto !important; right: 9px !important; }
+
+/* RTL fix: chat bubbles use physical margin-left/right (margin:auto to push a
+ * bubble to one side). Those don't mirror in RTL, so the assistant bubble
+ * landed on the wrong side with mismatched text. Swap them so user messages
+ * sit on the right edge and assistant messages on the left — the natural
+ * mirror of the LTR layout. text-align:start already follows dir. */
+html[dir="rtl"] .chat-history .msg.msg-user { margin-left: 8px !important; margin-right: auto !important; }
+html[dir="rtl"] .chat-history .msg.msg-ai   { margin-right: 8px !important; margin-left: auto !important; }

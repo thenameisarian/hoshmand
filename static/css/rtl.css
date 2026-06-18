@@ -63,3 +63,23 @@ html[dir="rtl"] .hamburger-btn { left: auto !important; right: 9px !important; }
  * mirror of the LTR layout. text-align:start already follows dir. */
 html[dir="rtl"] .chat-history .msg.msg-user { margin-left: 8px !important; margin-right: auto !important; }
 html[dir="rtl"] .chat-history .msg.msg-ai   { margin-right: 8px !important; margin-left: auto !important; }
+
+/* ── RTL audit fixes: mirror components hard-pinned with physical left/right ── */
+
+/* Toast/notification popups were pinned right:16px → rendered off-screen past
+   the right edge in RTL. Move them to the bottom-left so they're visible. */
+html[dir="rtl"] .toast,
+html[dir="rtl"] #toast,
+html[dir="rtl"] .toast-container { left: 16px !important; right: auto !important; }
+
+/* Sidebar resize handle sat at right:-3px (outer edge in RTL). The sidebar is
+   on the right, so the drag handle belongs on its LEFT (inner) edge. */
+html[dir="rtl"] .sidebar-resize-handle { left: -3px !important; right: auto !important; }
+
+/* The "+" section labels were offset to the left of their row (left:-24px),
+   leaving stray "+" marks adrift. Mirror the offset to the right side. */
+html[dir="rtl"] .list-item-plus-label { left: auto !important; right: -24px !important; }
+
+/* Inline action icons / metadata that assume left-origin: let them follow dir. */
+html[dir="rtl"] .msg-actions,
+html[dir="rtl"] .msg-footer { direction: rtl; }

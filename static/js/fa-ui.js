@@ -94,13 +94,44 @@
     });
   }
 
+  // Direction is user-switchable and remembered. Default RTL (Persian-first);
+  // flip to LTR anytime via the toggle if RTL layout quirks bother you.
+  function applyDir() {
+    var d = localStorage.getItem("hooshmand_dir") || "rtl";
+    document.documentElement.setAttribute("dir", d);
+    document.documentElement.setAttribute("lang", "fa");
+    return d;
+  }
+
+  function addDirToggle() {
+    if (document.getElementById("hooshmand-dir-toggle")) return;
+    var cur = localStorage.getItem("hooshmand_dir") || "rtl";
+    var btn = document.createElement("button");
+    btn.id = "hooshmand-dir-toggle";
+    btn.type = "button";
+    btn.title = "Switch interface direction (RTL/LTR)";
+    btn.textContent = cur === "rtl" ? "⇄ LTR" : "⇄ RTL";
+    btn.style.cssText =
+      "position:fixed;bottom:10px;" + (cur === "rtl" ? "left:10px;" : "right:10px;") +
+      "z-index:9999;font-size:11px;padding:4px 8px;border-radius:6px;" +
+      "border:1px solid var(--border,#888);background:var(--panel,#222);" +
+      "color:var(--fg,#ddd);opacity:.6;cursor:pointer;font-family:system-ui,sans-serif;";
+    btn.onmouseenter = function () { btn.style.opacity = "1"; };
+    btn.onmouseleave = function () { btn.style.opacity = ".6"; };
+    btn.onclick = function () {
+      var next = (localStorage.getItem("hooshmand_dir") || "rtl") === "rtl" ? "ltr" : "rtl";
+      localStorage.setItem("hooshmand_dir", next);
+      location.reload();
+    };
+    document.body.appendChild(btn);
+  }
+
   function run() {
     try {
-      // Keep the app's native left-to-right layout (it wasn't built for RTL);
-      // we only translate the visible chrome to Persian. Persian text still
-      // renders correctly via the browser's bidi handling.
+      applyDir();
       translateText(document.body);
       translateAttrs(document.body);
+      addDirToggle();
     } catch (e) { /* never break the app over translation */ }
   }
 

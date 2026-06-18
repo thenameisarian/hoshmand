@@ -15,6 +15,17 @@ venv/
 .env.bak.*
 !.env.example
 
+# Secrets & API keys — never commit (belt-and-suspenders)
+*.key
+*.pem
+secrets.*
+*apikey*
+*api_key*
+# Training artifacts (large / regenerable)
+training/venv-train/
+training/outputs/
+training/data/huggingface/
+
 # Data — all user data stays local
 data/
 !services/hwfit/data/

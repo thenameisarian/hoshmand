@@ -249,10 +249,16 @@ function initializeEventListeners() {
         // Move menu to body so it's not affected by ancestor transforms
         if (exportMenu.parentElement !== document.body) document.body.appendChild(exportMenu);
         const rect = exportDlBtn.getBoundingClientRect();
-        exportMenu.style.top = (rect.bottom + 4) + 'px';
-        exportMenu.style.left = 'auto';
-        exportMenu.style.right = (window.innerWidth - rect.right) + 'px';
         exportMenu.classList.add('open');
+        // Position with viewport coordinates (works in both LTR and RTL):
+        // align the menu's right edge to the button, clamp on-screen.
+        exportMenu.style.top = (rect.bottom + 4) + 'px';
+        exportMenu.style.right = 'auto';
+        const mw = exportMenu.offsetWidth || 160;
+        let left = rect.right - mw;
+        if (left < 8) left = 8;
+        if (left + mw > window.innerWidth - 8) left = window.innerWidth - mw - 8;
+        exportMenu.style.left = left + 'px';
       }
     });
     document.addEventListener('click', () => exportMenu.classList.remove('open'));
